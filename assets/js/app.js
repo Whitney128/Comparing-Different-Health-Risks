@@ -1,4 +1,25 @@
 
+
+// var svgWidth = 960;
+// var svgHeight = 500;
+// var margin = {
+//   top: 20,
+//   right: 40,
+//   bottom: 80,
+//   left: 100
+// };
+
+// var width = svgWidth - margin.left - margin.right;
+// var height = svgHeight - margin.top - margin.bottom;
+
+// var svg = d3
+//   .select("#scatter")
+//   .append("svg")
+//   .attr("width", svgWidth)
+//   .attr("height", svgHeight + 40)
+
+// var chartGroup = svg.append("g")
+//   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 var chosenXAxis = "poverty";
 var chosenYAxis = "healthcare";
 
@@ -19,7 +40,6 @@ function renderXAxes(newXScale, xAxis) {
 }
 
 function yScale(data, chosenYAxis, chartHeight) {
-    // Create scales.
     var yLinearScale = d3.scaleLinear()
         .domain([d3.min(data, d => d[chosenYAxis]) * .8,
             d3.max(data, d => d[chosenYAxis]) * 1.2])
@@ -99,17 +119,17 @@ function makeResponsive() {
 
     var chartGroup = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
-    d3.csv("../assets/data/data.csv").then(function(demoData, err) {
+    d3.csv("../assets/data/data.csv").then(function(povertyData, err) {
         if (err) throw err;
 
-        demoData.forEach(function(data) {
+        povertyData.forEach(function(data) {
             data.poverty = +data.poverty;
             data.healthcare = +data.healthcare;
             data.age = +data.age;
         });
 
-        var xLinearScale = xScale(demoData, chosenXAxis, chartWidth);
-        var yLinearScale = yScale(demoData, chosenYAxis, chartHeight);
+        var xLinearScale = xScale(povertyData, chosenXAxis, chartWidth);
+        var yLinearScale = yScale(povertyData, chosenYAxis, chartHeight);
 
         var bottomAxis =d3.axisBottom(xLinearScale);
         var leftAxis = d3.axisLeft(yLinearScale);
@@ -122,7 +142,7 @@ function makeResponsive() {
             .call(leftAxis);
 
         var circlesGroup = chartGroup.selectAll("circle")
-            .data(demoData);
+            .data(povertyData);
 
         var elemEnter = circlesGroup.enter();
 
