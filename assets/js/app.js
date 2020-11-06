@@ -1,6 +1,7 @@
 var chosenXAxis = "poverty";
 var chosenYAxis = "healthcare";
 
+//Creating xscale function
 function xScale(data, chosenXAxis, chartWidth) {
     var xLinearScale = d3.scaleLinear()
         .domain([d3.min(data, d => d[chosenXAxis]) * .8,
@@ -9,6 +10,7 @@ function xScale(data, chosenXAxis, chartWidth) {
     return xLinearScale;
 }
 
+//creating XAxes function
 function renderXAxes(newXScale, xAxis) {
     var bottomAxis = d3.axisBottom(newXScale);
     xAxis.transition()
@@ -17,6 +19,7 @@ function renderXAxes(newXScale, xAxis) {
     return xAxis;
 }
 
+//creating yscale function
 function yScale(data, chosenYAxis, chartHeight) {
     var yLinearScale = d3.scaleLinear()
         .domain([d3.min(data, d => d[chosenYAxis]) * .8,
@@ -25,6 +28,7 @@ function yScale(data, chosenYAxis, chartHeight) {
     return yLinearScale;
 }
 
+//creating yaxes function
 function renderYAxes(newYScale, yAxis) {
     var leftAxis = d3.axisLeft(newYScale);
     yAxis.transition()
@@ -33,6 +37,7 @@ function renderYAxes(newYScale, yAxis) {
     return yAxis;
 }
 
+//creating circles for plot
 function renderCircles(circlesGroup, newXScale, newYScale, chosenXAxis, chosenYAxis) {
     circlesGroup.transition()
         .duration(1000)
@@ -41,6 +46,7 @@ function renderCircles(circlesGroup, newXScale, newYScale, chosenXAxis, chosenYA
     return circlesGroup;
 }
 
+// rendertext on scatterplot
 function renderText(circletextGroup, newXScale, newYScale, chosenXAxis, chosenYAxis) {
     circletextGroup.transition()
         .duration(1000)
@@ -49,6 +55,7 @@ function renderText(circletextGroup, newXScale, newYScale, chosenXAxis, chosenYA
     return circletextGroup;
 }
 
+//adding tooltip
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
 
     if (chosenXAxis === "poverty") {
@@ -68,6 +75,8 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
     }
 
 }
+
+//make scatter responsive
 function makeResponsive() {
 
     var svgArea = d3.select("#scatter").select("svg");
