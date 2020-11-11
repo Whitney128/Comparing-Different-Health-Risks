@@ -1,4 +1,3 @@
-
 var svgWidth = 960;
 var svgHeight = 600;
 var margin = {
@@ -9,6 +8,7 @@ var margin = {
 };
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
+
 // Create an SVG wrapper, append an SVG group that will hold our chart,
 // and shift the latter by left and top margins.
 var svg = d3
@@ -16,12 +16,15 @@ var svg = d3
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
+
 // Append an SVG group
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
 // Initial Params
 var chosenXAxis = "poverty";
 var chosenYAxis = "healthcare";
+
 // function used for updating x-scale var upon click on axis label
 function xScale(data, chosenXAxis) {
   // create scales
@@ -32,6 +35,7 @@ function xScale(data, chosenXAxis) {
     .range([0, width]);
   return xLinearScale;
 }
+//function used for updating y-scale var upon click on axis
 function yScale(data, chosenYAxis) {
   // create scales
   var yLinearScale = d3.scaleLinear()
@@ -41,6 +45,7 @@ function yScale(data, chosenYAxis) {
     .range([height,0]);
   return yLinearScale;
 }
+
 // function used for updating xAxis var upon click on axis label
 function renderAxesX(newXScale, xAxis) {
   var bottomAxis = d3.axisBottom(newXScale);
@@ -49,6 +54,7 @@ function renderAxesX(newXScale, xAxis) {
     .call(bottomAxis);
   return xAxis;
 }
+//function used for updating yAxis var upon click on axis label
 function renderAxesY(newYScale, yAxis) {
   var leftAxis = d3.axisLeft(newYScale);
   yAxis.transition()
@@ -56,6 +62,7 @@ function renderAxesY(newYScale, yAxis) {
     .call(leftAxis);
   return yAxis;
 }
+
 // function used for updating circles group with a transition to
 // new circles
 function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
@@ -65,6 +72,7 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYA
     .attr("cy", d => newYScale(d[chosenYAxis]));
   return circlesGroup;
 }
+//function creating state abbreviations
 function renderStateAbbr(stateAbbr, newXScale, chosenXAxis, newYScale, chosenYAxis) {
   stateAbbr.transition()
     .duration(1000)
@@ -72,6 +80,7 @@ function renderStateAbbr(stateAbbr, newXScale, chosenXAxis, newYScale, chosenYAx
     .attr("y", d => newYScale(d[chosenYAxis]));
   return stateAbbr;
 }
+
 // function used for updating circles group with new tooltip
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
   var labelx;
@@ -97,7 +106,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
   return circlesGroup;
 }
-// entering data
+// pulling data
 d3.csv("assets/data/data.csv").then(function(data, err) {
   if (err) throw err;
   // parse data
@@ -112,18 +121,22 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
 
   var xLinearScale = xScale(data, chosenXAxis);
   var yLinearScale = yScale(data, chosenYAxis);
+  
   // Create initial axis functions
   var bottomAxis = d3.axisBottom(xLinearScale);
   var leftAxis = d3.axisLeft(yLinearScale);
+  
   // append x axis
   var xAxis = chartGroup.append("g")
     .classed("x-axis", true)
     .attr("transform", `translate(0, ${height})`)
     .call(bottomAxis);
+  
   // append y axis
  var yAxis = chartGroup.append("g")
     .classed("y-axis", true)
     .call(leftAxis);
+  
   // append circles
   var circlesGroup = chartGroup.selectAll("circle")
     .data(data)
@@ -134,7 +147,8 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
     .attr("r", 12)
     .attr("opacity", "0.8")
-    //adding state abbreviations 
+  
+    //append state abbreviations 
   var stateAbbr = chartGroup.selectAll("abbr")
     .data(data)
     .enter()
@@ -144,44 +158,53 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
     .attr("font-size", "8px")
+  
     //creating xaxis labels
   var labelsGroupX = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
+  //creating poverty label
   var povertyLabel = labelsGroupX.append("text")
     .attr("x", 0)
     .attr("y", 20)
     .attr("value", "poverty")
     .classed("active", true)
     .text("Poverty (%)");
+  //creating age label
   var ageLabel = labelsGroupX.append("text")
     .attr("x", 0)
     .attr("y", 40)
     .attr("value", "age")
     .classed("inactive", true)
     .text("Age: Median ");
+  //creating household income label
   var houseLabel = labelsGroupX.append("text")
   .attr("x", 0)
   .attr("y", 60)
   .attr("value", "income") 
   .classed("inactive", true)
   .text("Hosehold Income: Median ");
+  
   // creating yaxis labels
   var labelsGroupY = chartGroup.append("g")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left)
     .attr("x", 0 - (height / 2))
+  //creating lack of healthcare label
   var healhLabel = labelsGroupY.append("text") 
     .attr("value", "healthcare")
     .attr("dx", "-10em")
     .attr("dy", "-2em")
     .classed("active", true)
     .text("Lacks Healthcare %");
+  //creating smokers label
   var smokesLabel = labelsGroupY.append("text") 
   .attr("value", "smokes")
   .attr("dx", "-10em")
   .attr("dy", "-4em")
   .classed("inactive", true)
   .text("Smokes %");
+  
+  //creating obese label
   var obeseLabel = labelsGroupY.append("text") 
   .attr("value", "obesity")
   .attr("dx", "-10em")
