@@ -162,6 +162,7 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
     //creating xaxis labels
   var labelsGroupX = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
+  
   //creating poverty label
   var povertyLabel = labelsGroupX.append("text")
     .attr("x", 0)
@@ -169,6 +170,7 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
     .attr("value", "poverty")
     .classed("active", true)
     .text("Poverty (%)");
+  
   //creating age label
   var ageLabel = labelsGroupX.append("text")
     .attr("x", 0)
@@ -176,6 +178,7 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
     .attr("value", "age")
     .classed("inactive", true)
     .text("Age: Median ");
+  
   //creating household income label
   var houseLabel = labelsGroupX.append("text")
   .attr("x", 0)
@@ -189,6 +192,7 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left)
     .attr("x", 0 - (height / 2))
+  
   //creating lack of healthcare label
   var healhLabel = labelsGroupY.append("text") 
     .attr("value", "healthcare")
@@ -196,6 +200,7 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
     .attr("dy", "-2em")
     .classed("active", true)
     .text("Lacks Healthcare %");
+  
   //creating smokers label
   var smokesLabel = labelsGroupY.append("text") 
   .attr("value", "smokes")
@@ -212,6 +217,7 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
   .classed("inactive", true)
   .text("Obese %");
 
+  //adding xAxis interaction
   labelsGroupX.selectAll("text")
     .on("click", function() {
 
@@ -227,6 +233,8 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
 
         stateAbbr = renderStateAbbr(stateAbbr, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
+        
+        //adding age label interaction
         if (chosenXAxis === "age") {
           ageLabel
             .classed("active",true)
@@ -238,6 +246,8 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
             .classed("active",false)
             .classed("inactive", true);
         } 
+        
+        //adding income label interaction
         else if(chosenXAxis === "income"){
           houseLabel
             .classed("active",true)
@@ -249,6 +259,8 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
             .classed("active",false)
             .classed("inactive", true);
         } 
+        
+        //adding poverty label interaction
         else {
           houseLabel
             .classed("active",false)
@@ -262,6 +274,8 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
         }
       }
     })
+  
+  //adding yAxis interaction
       labelsGroupY.selectAll("text")
         .on("click", function() {
         // get value of selection
@@ -277,6 +291,8 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
             circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
             
             stateAbbr = renderStateAbbr(stateAbbr, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
+            
+            //adding smokers label interaction
             if (chosenYAxis === "smokes") {
               smokesLabel
                 .classed("active",true)
@@ -288,6 +304,8 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
                 .classed("active",false)
                 .classed("inactive", true);
             } 
+            
+            //adding obesity label interaction
             else if(chosenXAxis === "obesity"){
               smokesLabel
                 .classed("active",false)
@@ -299,6 +317,8 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
                 .classed("active",true)
                 .classed("inactive", false);
             } 
+            
+            //adding lack of healthcare label interaction
             else {
               smokesLabel
                 .classed("active",false)
