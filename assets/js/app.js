@@ -35,6 +35,7 @@ function xScale(data, chosenXAxis) {
     .range([0, width]);
   return xLinearScale;
 }
+
 //function used for updating y-scale var upon click on axis
 function yScale(data, chosenYAxis) {
   // create scales
@@ -54,6 +55,7 @@ function renderAxesX(newXScale, xAxis) {
     .call(bottomAxis);
   return xAxis;
 }
+
 //function used for updating yAxis var upon click on axis label
 function renderAxesY(newYScale, yAxis) {
   var leftAxis = d3.axisLeft(newYScale);
@@ -72,6 +74,7 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYA
     .attr("cy", d => newYScale(d[chosenYAxis]));
   return circlesGroup;
 }
+
 //function creating state abbreviations
 function renderStateAbbr(stateAbbr, newXScale, chosenXAxis, newYScale, chosenYAxis) {
   stateAbbr.transition()
@@ -106,6 +109,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
   return circlesGroup;
 }
+
 // pulling data
 d3.csv("assets/data/data.csv").then(function(data, err) {
   if (err) throw err;
