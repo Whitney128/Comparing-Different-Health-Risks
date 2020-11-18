@@ -21,6 +21,8 @@ Include state abbreviations in the circles.
 
 Create and situate your axes and labels to the left and bottom of the chart.
 
+Usability:
+
 Finding the correlations between poverty and states that lack healthcare using a scatterplot. 
 Once these correlations have been done, added correlations comparing smokers, obseity, age, household income to the scatterplot as well.
 This scatterplot is now interactive you can click on any label on ither one of the axis's to compare against different health risks.
