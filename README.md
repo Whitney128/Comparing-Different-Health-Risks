@@ -30,3 +30,14 @@ Looking at the scatter plot you can see the correlations between states that lac
 
 Webpage link- https://whitney128.github.io/D3-challenge/
 
+![image](https://user-images.githubusercontent.com/66101341/101559226-ee801a00-397d-11eb-801a-38a3f1bc184c.png)
+
+![image](https://user-images.githubusercontent.com/66101341/101559251-fcce3600-397d-11eb-9337-2b5ae525f205.png)
+
+![image](https://user-images.githubusercontent.com/66101341/101559280-0bb4e880-397e-11eb-9819-8fd652191e0f.png)
+
+![image](https://user-images.githubusercontent.com/66101341/101559317-1bccc800-397e-11eb-8590-e5840a7be084.png)
+
+![image](https://user-images.githubusercontent.com/66101341/101559352-2ab37a80-397e-11eb-9f2f-c6831641f244.png)
+
+![image](https://user-images.githubusercontent.com/66101341/101559384-3dc64a80-397e-11eb-97ac-501239279814.png)
