@@ -28,7 +28,7 @@ Once these correlations have been done, added correlations comparing smokers, ob
 This scatterplot is now interactive you can click on any label on ither one of the axis's to compare against different health risks.
 Looking at the scatter plot you can see the correlations between states that lack healthcare and poverty rate in each state. 
 
-Webpage link- https://whitney128.github.io/D3-challenge/
+Webpage link- https://whitney128.github.io/Comparing-Different-Health-Risks/
 
 ![image](https://user-images.githubusercontent.com/66101341/101559226-ee801a00-397d-11eb-801a-38a3f1bc184c.png)
 
