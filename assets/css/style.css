@@ -1,3 +1,7 @@
+body {
+  background-color: red;
+}
+
 .iframeContainer {
   padding: 20px;
   border: 1px solid #e3e3e3;
